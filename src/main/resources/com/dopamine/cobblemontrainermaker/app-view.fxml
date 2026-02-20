@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" prefViewportHeight="900.0" prefViewportWidth="700.0"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dopamine.cobblemontrainermaker.AppController">
+    <VBox spacing="14.0" prefWidth="660.0">
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+
+        <Label text="Cobblemon Trainer Maker" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+        <!-- ── Trainer Info ── -->
+        <TitledPane text="Trainer Info" collapsible="false" animated="false">
+            <GridPane hgap="10.0" vgap="8.0">
+                <padding><Insets top="8.0" right="8.0" bottom="8.0" left="8.0"/></padding>
+                <columnConstraints>
+                    <ColumnConstraints minWidth="150.0" maxWidth="150.0"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="trainerNameField" promptText="e.g. Champion Cynthia"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Identity" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="identityField" promptText="e.g. cynthia_boss"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Battle Format" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <ComboBox fx:id="battleFormatBox" maxWidth="Infinity"
+                          GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Max Item Uses" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <Spinner fx:id="maxItemUsesSpinner" editable="true" maxWidth="Infinity"
+                         GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Max Select Margin" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextField fx:id="maxSelectMarginField" promptText="0.05"
+                           GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            </GridPane>
+        </TitledPane>
+
+        <!-- ── Bag Items ── -->
+        <TitledPane text="Bag Items" collapsible="false" animated="false">
+            <VBox spacing="8.0">
+                <padding><Insets top="8.0" right="8.0" bottom="8.0" left="8.0"/></padding>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <TextField fx:id="bagItemField" promptText="Item ID (e.g. cobblemon:full_restore)"
+                               HBox.hgrow="ALWAYS"/>
+                    <Label text="x"/>
+                    <Spinner fx:id="bagQuantitySpinner" editable="true" prefWidth="75.0"/>
+                    <Button text="Add" onAction="#onAddBagItem"/>
+                </HBox>
+                <ListView fx:id="bagListView" prefHeight="100.0"/>
+                <Button text="Remove Selected" onAction="#onRemoveBagItem"/>
+            </VBox>
+        </TitledPane>
+
+        <!-- ── Team ── -->
+        <Label text="Team (Showdown format)" style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="showdownInput"
+                  promptText="Paste your Showdown team here..."
+                  prefHeight="220.0" wrapText="true"/>
+
+        <Button text="Generate JSON" onAction="#onGenerateJson" maxWidth="Infinity"
+                style="-fx-font-size: 13; -fx-font-weight: bold;"/>
+
+    </VBox>
+</ScrollPane>
