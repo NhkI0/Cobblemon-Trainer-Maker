@@ -56,8 +56,21 @@ jlink {
     launcher {
         name = "CobblemonTrainerMaker"
     }
-    jpackage {
-        imageName = "CobblemonTrainerMaker"
-        skipInstaller = true
-    }
+}
+
+// Wraps the jlink image into a native app folder with a .exe launcher
+tasks.register<Exec>("packageApp") {
+    dependsOn("jlink")
+    val jpackageBin = "${System.getProperty("java.home")}/bin/jpackage"
+    val imageDir = layout.buildDirectory.dir("image").get().asFile.absolutePath
+    val destDir  = layout.buildDirectory.dir("dist").get().asFile.absolutePath
+    doFirst { file(destDir).mkdirs() }
+    commandLine(
+        jpackageBin,
+        "--type",          "app-image",
+        "--name",          "CobblemonTrainerMaker",
+        "--runtime-image", imageDir,
+        "--module",        "com.dopamine.cobblemontrainermaker/com.dopamine.cobblemontrainermaker.TrainerApplication",
+        "--dest",          destDir
+    )
 }
