@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.dopamine"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -64,7 +64,10 @@ tasks.register<Exec>("packageApp") {
     val jpackageBin = "${System.getProperty("java.home")}/bin/jpackage"
     val imageDir = layout.buildDirectory.dir("image").get().asFile.absolutePath
     val destDir  = layout.buildDirectory.dir("dist").get().asFile.absolutePath
-    doFirst { file(destDir).mkdirs() }
+    doFirst {
+        file("$destDir/CobblemonTrainerMaker").deleteRecursively()
+        file(destDir).mkdirs()
+    }
     commandLine(
         jpackageBin,
         "--type",          "app-image",
