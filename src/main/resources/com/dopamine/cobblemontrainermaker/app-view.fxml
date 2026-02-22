@@ -61,6 +61,54 @@
             </VBox>
         </TitledPane>
 
+        <!-- ── Loot Table ── -->
+        <TitledPane text="Loot Table" collapsible="false" animated="false">
+            <VBox spacing="8.0">
+                <padding><Insets top="8.0" right="8.0" bottom="8.0" left="8.0"/></padding>
+
+                <Label text="Guaranteed Drops" style="-fx-font-weight: bold;"/>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <TextField fx:id="bagDropItemField" promptText="Item ID (e.g. minecraft:diamond)"
+                               HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="defeatComparatorBox" prefWidth="60.0"/>
+                    <Spinner fx:id="defeatCountSpinner" editable="true" prefWidth="75.0"/>
+                    <Button text="Add" onAction="#onAddGuaranteedDrop"/>
+                </HBox>
+                <ListView fx:id="guaranteedDropListView" prefHeight="80.0"/>
+                <Button text="Remove Selected" onAction="#onRemoveGuaranteedDrop"/>
+
+                <Label text="Weighted Drops" style="-fx-font-weight: bold;"/>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <Label text="Rolls:"/>
+                    <ToggleButton fx:id="fixedRollsToggle" text="Fixed"/>
+                    <ToggleButton fx:id="binomialRollsToggle" text="Binomial"/>
+                </HBox>
+                <HBox fx:id="fixedRollsBox" spacing="8.0" alignment="CENTER_LEFT">
+                    <Spinner fx:id="weightedRollsSpinner" editable="true" prefWidth="75.0"/>
+                </HBox>
+                <HBox fx:id="binomialRollsBox" spacing="8.0" alignment="CENTER_LEFT"
+                      managed="false" visible="false">
+                    <Label text="n:"/>
+                    <Spinner fx:id="binomialNSpinner" editable="true" prefWidth="75.0"/>
+                    <Label text="p:"/>
+                    <TextField fx:id="binomialPField" promptText="0.35" prefWidth="60.0"/>
+                </HBox>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <ComboBox fx:id="entryTypeBox" prefWidth="160.0"/>
+                    <TextField fx:id="entryNameField" promptText="e.g. rctmod:generic/common/pokeballs"
+                               HBox.hgrow="ALWAYS"/>
+                    <Label text="Weight:"/>
+                    <Spinner fx:id="entryWeightSpinner" editable="true" prefWidth="80.0"/>
+                    <Label text="Lvl:"/>
+                    <TextField fx:id="levelMinField" promptText="min" prefWidth="50.0"/>
+                    <TextField fx:id="levelMaxField" promptText="max" prefWidth="50.0"/>
+                    <Button text="Add" onAction="#onAddWeightedEntry"/>
+                </HBox>
+                <ListView fx:id="weightedEntryListView" prefHeight="100.0"/>
+                <Button text="Remove Selected" onAction="#onRemoveWeightedEntry"/>
+            </VBox>
+        </TitledPane>
+
         <!-- ── Team ── -->
         <Label text="Team (Showdown format)" style="-fx-font-weight: bold;"/>
         <TextArea fx:id="showdownInput"
